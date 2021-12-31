@@ -1,0 +1,26 @@
+//----- Backdrop switch events ----------------------------------------------------------------------------------------
+
+WhenBackdropSwitchesTo(frame)
+{
+    Looks.Show();
+}
+
+WhenBackdropSwitchesTo(START GAME)
+{
+    Looks.Hide();
+}
+
+WhenBackdropSwitchesTo(GAME OVER)
+{
+    Looks.Hide();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

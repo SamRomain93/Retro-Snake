@@ -1,0 +1,50 @@
+//----- Backdrop switch events ----------------------------------------------------------------------------------------
+
+WhenBackdropSwitchesTo(frame)
+{
+    Looks.Show();
+    Forever
+    {
+        If (Direction == "up")
+        {
+            Motion.GoToXY(xPos, (yPos + 15));
+        }
+        If (Direction == "down")
+        {
+            Motion.GoToXY(xPos, (yPos - 15));
+        }
+        If (Direction == "right")
+        {
+            Motion.GoToXY((xPos + 15), yPos);
+        }
+        If (Direction == "left")
+        {
+            Motion.GoToXY((xPos - 15), yPos);
+        }
+        If (Sensing.TouchingObject(Wall) Or Sensing.TouchingObject(RetroSnake))
+        {
+            Event.Broadcast("GameOver");
+            Looks.SwitchBackdropTo(GAME OVER);
+            Sound.PlayUntilDone(Game Over );
+            Stop(all);
+        }
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(GameOver)
+{
+    Looks.Hide();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+tongue.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Game Over .wav

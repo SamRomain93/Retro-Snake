@@ -1,0 +1,35 @@
+//----- Backdrop switch events ----------------------------------------------------------------------------------------
+
+WhenBackdropSwitchesTo(frame)
+{
+    Looks.Show();
+    Motion.GoToXY(Operator.Random(-220 / 220), Operator.Random(110 / -165));
+    Forever
+    {
+        If Sensing.TouchingObject(RetroSnake)
+        {
+            Score += 1;
+            Motion.GoToXY(Operator.Random(-220 / 220), Operator.Random(110 / -165));
+        }
+    }
+}
+
+WhenBackdropSwitchesTo(GAME OVER)
+{
+    Looks.Hide();
+}
+
+WhenBackdropSwitchesTo(START GAME)
+{
+    Looks.Hide();
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+costume1.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+pop.wav

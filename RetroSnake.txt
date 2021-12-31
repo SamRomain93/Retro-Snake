@@ -1,0 +1,102 @@
+//----- Key pressed events --------------------------------------------------------------------------------------------
+
+WhenKeyPressed(up arrow)
+{
+    Direction = "up";
+}
+
+WhenKeyPressed(left arrow)
+{
+    Direction = "left";
+}
+
+WhenKeyPressed(right arrow)
+{
+    Direction = "right";
+}
+
+WhenKeyPressed(down arrow)
+{
+    Direction = "down";
+}
+
+
+//----- Backdrop switch events ----------------------------------------------------------------------------------------
+
+WhenBackdropSwitchesTo(frame)
+{
+    Looks.Show();
+    Looks.SwitchCostumeTo(Head);
+    Direction = "right";
+    Motion.GoToXY(0, 0);
+    Forever
+    {
+        If (Direction == "up")
+        {
+            Motion.ChangeYBy(5);
+            Call CheckWallCollision;
+        }
+        If (Direction == "down")
+        {
+            Motion.ChangeYBy(-5);
+            Call CheckWallCollision;
+        }
+        If (Direction == "right")
+        {
+            Motion.ChangeXBy(5);
+            Call CheckWallCollision;
+        }
+        If (Direction == "left")
+        {
+            Motion.ChangeXBy(-5);
+            Call CheckWallCollision;
+        }
+        Control.CreateCloneOf(_myself_);
+        xPos = Motion.XPosition();
+        yPos = Motion.YPosition();
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(GameOver)
+{
+    Looks.Hide();
+}
+
+
+//----- Start as clone ------------------------------------------------------------------------------------------------
+
+Control.WhenIStartAsClone()
+{
+    Looks.SwitchCostumeTo(body);
+    Control.Wait(Score);
+    Control.DeleteThisClone();
+}
+
+
+//----- Custom blocks -------------------------------------------------------------------------------------------------
+
+Define CheckWallCollision (warp=true)
+{
+    If Sensing.TouchingObject(Wall)
+    {
+        Event.Broadcast("GameOver");
+        Sound.PlayUntilDone(Game Over );
+        Looks.SwitchBackdropTo(GAME OVER);
+        Stop(all);
+    }
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+Body.svg
+Head.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Game Over .wav
+Retro Game 8-bit loop.wav

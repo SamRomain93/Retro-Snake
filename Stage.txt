@@ -1,0 +1,55 @@
+//----- Variables -----------------------------------------------------------------------------------------------------
+
+Direction = left
+my variable = 0
+Score = 2
+Velocity = 0
+xPos = 230
+yPos = 10
+
+
+
+//----- Green flag events ---------------------------------------------------------------------------------------------
+
+WhenGreenFlagClicked()
+{
+    Looks.SwitchBackdropTo(START GAME);
+    Variable.Hide(Direction);
+    Variable.Hide(Score);
+    Score = 0;
+    Looks.SwitchBackdropTo(START GAME);
+    Wait Until Sensing.KeyPressed(any);
+    Looks.SwitchBackdropTo(frame);
+    Variable.Show(Direction);
+    Variable.Show(Score);
+}
+
+WhenGreenFlagClicked()
+{
+    Sound.SetVolumeTo(30);
+    Forever
+    {
+        Sound.PlayUntilDone(Retro Game 8-bit loop);
+    }
+}
+
+
+//----- Broadcast received events -------------------------------------------------------------------------------------
+
+WhenBroadcastReceived(GameOver)
+{
+    Looks.SwitchBackdropTo(GAME OVER);
+}
+
+
+//----- Costumes ------------------------------------------------------------------------------------------------------
+
+frame.svg
+GAME OVER.svg
+START GAME.svg
+
+
+//----- Sounds --------------------------------------------------------------------------------------------------------
+
+Game Over .wav
+Retro Game 8-bit loop.wav
